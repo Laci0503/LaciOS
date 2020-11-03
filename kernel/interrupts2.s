@@ -1,0 +1,309 @@
+%macro  handle_irq 1
+    global handle_interrupt%1
+    handle_interrupt%1:
+        mov byte [interruptnumber], %1
+        jmp HANDLE_INTERRUPTS
+%endmacro
+
+handle_irq 0
+handle_irq 1
+handle_irq 2
+handle_irq 3
+handle_irq 4
+handle_irq 5
+handle_irq 6
+handle_irq 7
+handle_irq 8
+handle_irq 9
+handle_irq 10
+handle_irq 11
+handle_irq 12
+handle_irq 13
+handle_irq 14
+handle_irq 15
+handle_irq 16
+handle_irq 17
+handle_irq 18
+handle_irq 19
+handle_irq 20
+handle_irq 21
+handle_irq 22
+handle_irq 23
+handle_irq 24
+handle_irq 25
+handle_irq 26
+handle_irq 27
+handle_irq 28
+handle_irq 29
+handle_irq 30
+handle_irq 31
+handle_irq 32
+handle_irq 33
+handle_irq 34
+handle_irq 35
+handle_irq 36
+handle_irq 37
+handle_irq 38
+handle_irq 39
+handle_irq 40
+handle_irq 41
+handle_irq 42
+handle_irq 43
+handle_irq 44
+handle_irq 45
+handle_irq 46
+handle_irq 47
+handle_irq 48
+handle_irq 49
+handle_irq 50
+handle_irq 51
+handle_irq 52
+handle_irq 53
+handle_irq 54
+handle_irq 55
+handle_irq 56
+handle_irq 57
+handle_irq 58
+handle_irq 59
+handle_irq 60
+handle_irq 61
+handle_irq 62
+handle_irq 63
+handle_irq 64
+handle_irq 65
+handle_irq 66
+handle_irq 67
+handle_irq 68
+handle_irq 69
+handle_irq 70
+handle_irq 71
+handle_irq 72
+handle_irq 73
+handle_irq 74
+handle_irq 75
+handle_irq 76
+handle_irq 77
+handle_irq 78
+handle_irq 79
+handle_irq 80
+handle_irq 81
+handle_irq 82
+handle_irq 83
+handle_irq 84
+handle_irq 85
+handle_irq 86
+handle_irq 87
+handle_irq 88
+handle_irq 89
+handle_irq 90
+handle_irq 91
+handle_irq 92
+handle_irq 93
+handle_irq 94
+handle_irq 95
+handle_irq 96
+handle_irq 97
+handle_irq 98
+handle_irq 99
+handle_irq 100
+handle_irq 101
+handle_irq 102
+handle_irq 103
+handle_irq 104
+handle_irq 105
+handle_irq 106
+handle_irq 107
+handle_irq 108
+handle_irq 109
+handle_irq 110
+handle_irq 111
+handle_irq 112
+handle_irq 113
+handle_irq 114
+handle_irq 115
+handle_irq 116
+handle_irq 117
+handle_irq 118
+handle_irq 119
+handle_irq 120
+handle_irq 121
+handle_irq 122
+handle_irq 123
+handle_irq 124
+handle_irq 125
+handle_irq 126
+handle_irq 127
+handle_irq 128
+handle_irq 129
+handle_irq 130
+handle_irq 131
+handle_irq 132
+handle_irq 133
+handle_irq 134
+handle_irq 135
+handle_irq 136
+handle_irq 137
+handle_irq 138
+handle_irq 139
+handle_irq 140
+handle_irq 141
+handle_irq 142
+handle_irq 143
+handle_irq 144
+handle_irq 145
+handle_irq 146
+handle_irq 147
+handle_irq 148
+handle_irq 149
+handle_irq 150
+handle_irq 151
+handle_irq 152
+handle_irq 153
+handle_irq 154
+handle_irq 155
+handle_irq 156
+handle_irq 157
+handle_irq 158
+handle_irq 159
+handle_irq 160
+handle_irq 161
+handle_irq 162
+handle_irq 163
+handle_irq 164
+handle_irq 165
+handle_irq 166
+handle_irq 167
+handle_irq 168
+handle_irq 169
+handle_irq 170
+handle_irq 171
+handle_irq 172
+handle_irq 173
+handle_irq 174
+handle_irq 175
+handle_irq 176
+handle_irq 177
+handle_irq 178
+handle_irq 179
+handle_irq 180
+handle_irq 181
+handle_irq 182
+handle_irq 183
+handle_irq 184
+handle_irq 185
+handle_irq 186
+handle_irq 187
+handle_irq 188
+handle_irq 189
+handle_irq 190
+handle_irq 191
+handle_irq 192
+handle_irq 193
+handle_irq 194
+handle_irq 195
+handle_irq 196
+handle_irq 197
+handle_irq 198
+handle_irq 199
+handle_irq 200
+handle_irq 201
+handle_irq 202
+handle_irq 203
+handle_irq 204
+handle_irq 205
+handle_irq 206
+handle_irq 207
+handle_irq 208
+handle_irq 209
+handle_irq 210
+handle_irq 211
+handle_irq 212
+handle_irq 213
+handle_irq 214
+handle_irq 215
+handle_irq 216
+handle_irq 217
+handle_irq 218
+handle_irq 219
+handle_irq 220
+handle_irq 221
+handle_irq 222
+handle_irq 223
+handle_irq 224
+handle_irq 225
+handle_irq 226
+handle_irq 227
+handle_irq 228
+handle_irq 229
+handle_irq 230
+handle_irq 231
+handle_irq 232
+handle_irq 233
+handle_irq 234
+handle_irq 235
+handle_irq 236
+handle_irq 237
+handle_irq 238
+handle_irq 239
+handle_irq 240
+handle_irq 241
+handle_irq 242
+handle_irq 243
+handle_irq 244
+handle_irq 245
+handle_irq 246
+handle_irq 247
+handle_irq 248
+handle_irq 249
+handle_irq 250
+handle_irq 251
+handle_irq 252
+handle_irq 253
+handle_irq 254
+handle_irq 255
+
+
+extern kernel_handle_interrupt
+extern printint
+
+HANDLE_INTERRUPTS:
+    push ebp
+    push edi
+    push esi
+
+    push edx
+    push ecx
+    push ebx
+    push eax
+
+    ;push esp
+    ;mov eax, 0
+    ;mov al, [interruptnumber]
+    ;push eax
+    ;call kernel_handle_interrupt
+    ;mov esp, eax
+
+    mov byte eax, [interruptnumber]
+    push eax
+    call printint
+
+    pop eax
+    pop ebx
+    pop ecx
+    pop edx
+
+    pop esi
+    pop edi
+    pop ebp
+
+    ;add esp, 4
+    iret
+
+global loadidt
+loadidt:
+    sub esp, 4
+    pop eax
+    ret
+
+interruptnumber:
+db 0
