@@ -1,11 +1,5 @@
 #include "../headers/types.h"
-#include "../headers/ata.h"
-#include "../headers/drives.h"
-#include "../headers/input.h"
 #include "../headers/interrupts.h"
-#include "../headers/string.h"
-#include "../headers/video.h"
-#include "../headers/pci.h"
 #include "../headers/memory.h"
 #include "../headers/terminal.h"
 
@@ -15,7 +9,7 @@ void mode_select_function(uint8 key);
 
 uint8* mode_select_selected;
 void _KERNEL_ENTRY(){
-    videoInit();
+    /*videoInit();
     //clear();
     forecolor=WHITE;
     backcolor=BLACK;
@@ -58,12 +52,19 @@ void _KERNEL_ENTRY(){
         
     }else{
         //graphics mode
-    }
+    }*/
+
+    //Memory manager
+    //setupInterrupts();  //Interrupts
+    //Task manager
+        //Drivers
+        //Terminal
+
 
     while(1);
 }
 
-void mode_select_function(uint8 key){
+/*void mode_select_function(uint8 key){
     goxy(0,0);
     if(key == 2){
         *mode_select_selected=0;
@@ -91,4 +92,4 @@ void mode_select_function(uint8 key){
         backcolor=WHITE;
         print("> Graphics mode");
     }
-}
+}*/

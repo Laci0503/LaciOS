@@ -8,6 +8,10 @@
 #define PICSlaveCommand 0xA0
 #define PICSlaveData 0xA1
 
+typedef volatile struct{
+
+} CPUState;
+
 typedef volatile struct
 {
     int16 handlerAddressLowBits;

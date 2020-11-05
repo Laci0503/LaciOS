@@ -11,6 +11,8 @@ uint32 handleInterrupt(uint8 interruptnumber, uint32 esp){
         for(uint8 i=0;i<16;i++){
             (*keyboard_event_handlers[i])(next_keyboard_byte());
         }
+    }else if(interruptnumber==HardwareInterruptOffset+0){ //Timer interrupt
+        
     }
     return esp;
 }
