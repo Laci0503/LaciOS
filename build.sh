@@ -23,6 +23,9 @@ FILES="\
        interrupts \
        memory \
        io \
+       taskmanager \
+       drivers/video \
+       string \
        KERNEL_MAIN"
 
 echo "Deleting old files"
@@ -60,7 +63,7 @@ done
 
 
 ld -o build/kernel.bin -T linker.ld -Ttext 0x100000 $TMP -m elf_i386 --oformat binary
-ld -o build/loader.bin -T linker.ld -Ttext 0x7e00 build/loader.o build/drives.o build/ata.o build/io.o -m elf_i386 --oformat binary
+ld -o build/loader.bin -T linker.ld -Ttext 0x7e00 build/loader.o build/io.o -m elf_i386 --oformat binary
 
 echo "Loader file size: "
 wc build/loader.bin | awk '{print $3}'
