@@ -1,1 +1,0 @@
-qemu-system-x86_64 -hda LaciOS.bin -m 3583M -soundhw hda
