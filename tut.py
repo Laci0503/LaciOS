@@ -1,0 +1,1 @@
+a=[];a[input()-1]+=1;print(a)

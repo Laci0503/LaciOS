@@ -4,7 +4,7 @@ HARDWARE_INT_OFFSET equ 0x20
 %macro interruptMacro 1
     global .interrupts.int%1
     .interrupts.int%1:
-        mov dw [.interruptNumber], %1
+        mov dword [.interruptNumber], %1
         jmp .interrupts.intHandler
 %endmacro
 
@@ -265,9 +265,14 @@ interruptMacro 253
 interruptMacro 254
 interruptMacro 255
 
-.interruptNumber
+.interruptNumber:
     dd 0
 
+extern handleInterrupt
 global .interrupts.intHandler
-.interrupts.intHandler
+.interrupts.intHandler:
+    jmp $
+    push dword [.interruptNumber]
+    call handleInterrupt
+
     

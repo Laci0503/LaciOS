@@ -9,7 +9,18 @@
 #define PICSlaveData 0xA1
 
 typedef volatile struct{
+    uint32 eax;
+    uint32 ebx;
+    uint32 ecx;
+    uint32 edx;
 
+    uint32 esi;
+    uint32 edi;
+    uint32 ebp;
+
+    uint32 eip;
+    uint32 esp;
+    uint32 cs;
 } CPUState;
 
 typedef volatile struct

@@ -1,21 +1,29 @@
-FILES="ata \
-       drives \
-       input \
+#FILES="\
+#       drivers/ata \
+#       drives \
+#       input \
+#       interrupts \
+#       io \
+#       memory \
+#       string \
+#       math \
+#       drivers/video \
+#       drivers/pci \
+#       drivers/ahci \
+#       KERNEL_MAIN \
+#       terminal \
+#       terminalPrograms \
+#       advanced_string \
+#       mandelbrot \
+#       infoPrinters \
+#       deviceManager \
+#       drivers/multimedia"
+
+FILES="\
        interrupts \
-       io \
        memory \
-       string \
-       math \
-       video \
-       pci \
-       ahci \
-       KERNEL_MAIN \
-       terminal \
-       terminalPrograms \
-       advanced_string \
-       mandelbrot \
-       infoPrinters \
-       deviceManager"
+       io \
+       KERNEL_MAIN"
 
 echo "Deleting old files"
 rm build/bootsector.bin
@@ -29,15 +37,16 @@ done
 
 echo "Compiling"
 nasm boot/bootsector.asm -f bin -o build/bootsector.bin
+nasm kernel/src/interrupts.asm -o build/interrupts_asm.o -f elf32
 
 for file in $FILES
 do
-    gcc -ffreestanding -c kernel/src/$file.c -o build/$file.o -m32 -fno-pie -fno-pic -ffunction-sections -static-libgcc -lgcc -Wno-unused-variable
+    gcc -ffreestanding -c kernel/src/$file.c -o build/$file.o -m32 -fno-pie -fno-pic -ffunction-sections -static-libgcc -lgcc -Wno-unused-variable -mno-red-zone
 done
 
-gcc -ffreestanding -c kernel/src/loader.c -o build/loader.o -m32 -fno-pie -fno-pic -ffunction-sections -static-libgcc -lgcc -Wno-unused-variable
+gcc -ffreestanding -c kernel/src/loader.c -o build/loader.o -m32 -fno-pie -fno-pic -ffunction-sections -static-libgcc -lgcc -Wno-unused-variable -mno-red-zone
 
-as kernel/src/interrupts.s -o build/interrupts_asm.o --32
+#as kernel/src/interrupts.s -o build/interrupts_asm.o --32
 #as kernel/src/kernel_start.s -o build/kernel_start.o --32
 
 echo "Linking"

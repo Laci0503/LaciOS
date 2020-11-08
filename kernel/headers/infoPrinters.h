@@ -5,5 +5,7 @@
 void printPciInfo();
 void printPciDevices();
 void printAHCI();
+void print_memory_map();
+void printMemoryManagerTable();
 
 #endif

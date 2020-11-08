@@ -65,3 +65,63 @@ void printAHCI(){
         }
     }
 }
+
+void print_memory_map(){
+    print("Aviable ram: ");
+    printint(heap_size/(1024*1024));
+    print(" MiB");
+    nextLine();
+
+    print("Memory map:");
+
+    nextLine();
+    goxy(1,getY());
+    print("Base address");
+    goxy(26,getY());
+    print("Length");
+    goxy(52,getY());
+    print("Type");
+    nextLine();
+    
+    uint8 cl=getY();
+
+    for(uint8 i = 0;i<memory_map_region_count;i++){
+        if(memory_map_region_type[i]==1){forecolor=LIGHT_GREEN;}else{forecolor=LIGHT_YELLOW;}
+        goxy(1,getY());
+        print("0x");
+        printhex(memroy_map_region_base[i]);
+        goxy(26,getY());
+        print("0x");
+        printhex(memory_map_region_length[i]);
+        goxy(52,getY());
+        if(memory_map_region_type[i]==1){
+            print("Usable ram");
+        }else if(memory_map_region_type[i]==2){
+            print("Reserved");
+        }else if(memory_map_region_type[i]==3){
+            print("ACPI reclaimable memory");
+        }else if(memory_map_region_type[i]==4){
+            print("ACPI NVS memory");
+        }else if(memory_map_region_type[i]==5){
+            print("Bad memory");
+        }
+        nextLine();
+    }
+    forecolor=WHITE;
+
+}
+
+void printMemoryManagerTable(){
+    nextLine();
+    print("Memory manager table");
+    nextLine();
+    print(" Base          State");
+    nextLine();
+    for(uint8 i=0;i<memory_piece_count;i++){
+        print(" 0x");
+        printhex(memory_pieces[i]);
+        goxy(15,getY());
+        if(mem_get_state(i))print("Free"); else print("Reserved");
+        nextLine();
+    }
+}

@@ -1,7 +1,4 @@
 #include "../headers/memory.h"
-#include "../headers/video.h"
-#include "../headers/string.h"
-#include "../headers/advanced_string.h"
 
 uint8 mem_get_state(uint8 piece){
     return (memory_state[piece/8] & (0x1 << (piece % 8))) != 0;
@@ -42,65 +39,6 @@ void load_memory_map(){
     memory_map_region_count=index;
 }
 uint32 avaible_ram;
-void print_memory_map(){
-    print("Aviable ram: ");
-    printint(heap_size/(1024*1024));
-    print(" MiB");
-    nextLine();
-
-    print("Memory map:");
-
-    nextLine();
-    goxy(1,getY());
-    print("Base address");
-    goxy(26,getY());
-    print("Length");
-    goxy(52,getY());
-    print("Type");
-    nextLine();
-    
-    uint8 cl=getY();
-
-    for(uint8 i = 0;i<memory_map_region_count;i++){
-        if(memory_map_region_type[i]==1){forecolor=LIGHT_GREEN;}else{forecolor=LIGHT_YELLOW;}
-        goxy(1,getY());
-        print("0x");
-        printhex(memroy_map_region_base[i]);
-        goxy(26,getY());
-        print("0x");
-        printhex(memory_map_region_length[i]);
-        goxy(52,getY());
-        if(memory_map_region_type[i]==1){
-            print("Usable ram");
-        }else if(memory_map_region_type[i]==2){
-            print("Reserved");
-        }else if(memory_map_region_type[i]==3){
-            print("ACPI reclaimable memory");
-        }else if(memory_map_region_type[i]==4){
-            print("ACPI NVS memory");
-        }else if(memory_map_region_type[i]==5){
-            print("Bad memory");
-        }
-        nextLine();
-    }
-    forecolor=WHITE;
-
-}
-
-void printMemoryManagerTable(){
-    nextLine();
-    print("Memory manager table");
-    nextLine();
-    print(" Base          State");
-    nextLine();
-    for(uint8 i=0;i<memory_piece_count;i++){
-        print(" 0x");
-        printhex(memory_pieces[i]);
-        goxy(15,getY());
-        if(mem_get_state(i))print("Free"); else print("Reserved");
-        nextLine();
-    }
-}
 
 void free(uint8* address, uint32 length){
     /*print("Freed memory from 0x");
@@ -135,6 +73,7 @@ void free(uint8* address, uint32 length){
         }
     }
     if (can_free){
+        #if (MEM_DEBUG==1)
         if((uint32)address+length>(pos==memory_piece_count-1 ? heap_size : memory_pieces[pos+1])){
             print("Memory error: Free; Length is bigger than the memory segment length, original length: ");
             printint(length);
@@ -143,6 +82,7 @@ void free(uint8* address, uint32 length){
             printint(length);
             nextLine();
         }
+        #endif
 
         uint8 eleje_annyi = memory_pieces[pos] == (uint32)address;
         uint8 vege_annyi= (pos==memory_piece_count-1 ? heap_size : memory_pieces[pos+1])==(uint32)address+length;
@@ -201,10 +141,12 @@ void free(uint8* address, uint32 length){
             nextLine();
         #endif
     }
+    #if (MEM_DEBUG==1)
     else{
         print("Memory error: Free; Can not find the desired location.");
         nextLine();
     }
+    #endif
 }
 
 void* malloc(uint32 length){
