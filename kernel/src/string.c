@@ -1,5 +1,5 @@
 #include "../headers/string.h"
-#include "../headers/video.h"
+#include "../headers/drivers/video.h"
 #include "../headers/math.h"
 
 uint8 strcmp(char str1[], char str2[]){

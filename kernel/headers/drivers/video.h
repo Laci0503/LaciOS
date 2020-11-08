@@ -1,6 +1,6 @@
 #ifndef _VIDEO_H
 #define _VIDEO_H
-#include "types.h"
+#include "../types.h"
 
 #define WIDTH 80
 #define HEIGHT 25

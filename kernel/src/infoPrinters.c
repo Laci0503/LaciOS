@@ -125,3 +125,13 @@ void printMemoryManagerTable(){
         nextLine();
     }
 }
+
+void mmap_terminal_command(string_array* args){
+    print_memory_map();
+    return;
+}
+void memory_manager_terminal_command(string_array* args){
+    if(args->length==0){
+        printMemoryManagerTable();
+    }
+}

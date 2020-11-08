@@ -1,7 +1,7 @@
-#include "../headers/video.h"
-#include "../headers/io.h"
-#include "../headers/string.h"
-#include "../headers/memory.h"
+#include "../../headers/drivers/video.h"
+#include "../../headers/io.h"
+#include "../../headers/string.h"
+#include "../../headers/memory.h"
 
 // from https://files.osdev.org/mirrors/geezer/osd/graphics/modes.c
 

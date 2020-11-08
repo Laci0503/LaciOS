@@ -39,8 +39,6 @@ void _KERNEL_ENTRY(){
             ata_readByte28bit(bus_master,result2,0,1);
             if(result2[0x1FC]==0xF0&&result2[0x1FD]==0xF0&&result2[0x1FE]==0x55&&result2[0x1FF]==0xAA){
                 ata_readByte28bit(bus_master,(uint8*)0x100000,58,120);
-                //ata_readByte28bit(bus_master,(uint8*)(0x100000+60*512),58+60,60);
-                //while(1);
                 asm("mov %esp, 0x7FFFF");
                 asm("mov %ebp, %esp");
                 ((void (*)())0x100000)();

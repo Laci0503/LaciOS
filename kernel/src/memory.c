@@ -326,16 +326,6 @@ uint8 memcmp(uint8* m1, uint8* m2, uint32 length){
     }
     return 1;
 }
-
-void mmap_terminal_command(string_array* args){
-    print_memory_map();
-    return;
-}
-void memory_manager_terminal_command(string_array* args){
-    if(args->length==0){
-        printMemoryManagerTable();
-    }
-}
 void memset(uint8* address, uint32 length, uint8 byte){
     for(uint32 i=0;i<length;i++){
         address[i]=byte;

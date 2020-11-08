@@ -2,11 +2,15 @@
 #include "../headers/interrupts.h"
 #include "../headers/memory.h"
 #include "../headers/terminal.h"
+#include "../headers/taskmanager.h"
+#include "../headers/drivers/video.h"
+#include "../headers/string.h"
 
 #define kernel_length 0xF000
 
-void mode_select_function(uint8 key);
-
+//void mode_select_function(uint8 key);
+void printInfinite(char c);
+void printInfinite2(char c);
 uint8* mode_select_selected;
 void _KERNEL_ENTRY(){
     /*videoInit();
@@ -55,13 +59,61 @@ void _KERNEL_ENTRY(){
     }*/
 
     //Memory manager
-    //setupInterrupts();  //Interrupts
+    //printInfinite('A');
+    taskManagerRunning=0;
+    load_memory_map();
+    memory_init();
+    malloc(120*512);
+    setupInterrupts();  //Interrupts
+    setupTaskManager();
+    videoInit();
+    forecolor=BLACK;
+    backcolor=WHITE;
+    //printInfinite('A');
+    
     //Task manager
         //Drivers
         //Terminal
+    int16 pid = addTask(&printInfinite2,100,0,"Test task","");
+    *((uint32*)(tasks[pid]->savedCpuState.esp))='D';
+    tasks[pid]->savedCpuState.esp-=4;
+    print(tasks[pid]->name);
+    print(" ");
+    print(tasks[pid]->filename);
+    tasks[pid]->state=TaskRunning;
 
-
+    //if(numTasks==2)
+    printInfinite('a');
     while(1);
+}
+
+void printInfinite(char c){
+    uint32 i=80;
+    while(1){
+        *((uint8*)0xb8000+i*2)=c;
+        *((uint8*)0xb8001+i*2)=0xf0;
+        i++;
+        for(uint16 j=0;j<100;j++){
+            for(uint16 k=0;k<50000;k++){
+                asm("NOP");
+            }
+        }
+    };
+}
+void printInfinite2(char c){
+    *((uint8*)0xb8000+1920*2)='C';
+    *((uint8*)0xb8001+1920*2)=0xf0;
+    uint32 i=2000;
+    while(1){
+        *((uint8*)0xb8000+i*2)=c;
+        *((uint8*)0xb8001+i*2)=0xf0;
+        i--;
+        for(uint16 j=0;j<100;j++){
+            for(uint16 k=0;k<50000;k++){
+                asm("NOP");
+            }
+        }
+    };
 }
 
 /*void mode_select_function(uint8 key){

@@ -7,5 +7,7 @@ void printPciDevices();
 void printAHCI();
 void print_memory_map();
 void printMemoryManagerTable();
+void mmap_terminal_command(string_array* args);
+void memory_manager_terminal_command(string_array* args);
 
 #endif

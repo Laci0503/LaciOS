@@ -1,11 +1,12 @@
 bits 32
 HARDWARE_INT_OFFSET equ 0x20
 
+.text:
 %macro interruptMacro 1
-    global .interrupts.int%1
-    .interrupts.int%1:
-        mov dword [.interruptNumber], %1
-        jmp .interrupts.intHandler
+    global interrupts_int%1
+    interrupts_int%1:
+        mov dword [interruptNumber], %1
+        jmp interrupts.intHandler
 %endmacro
 
 interruptMacro 0
@@ -265,14 +266,84 @@ interruptMacro 253
 interruptMacro 254
 interruptMacro 255
 
-.interruptNumber:
+interruptNumber:
     dd 0
-
+esp_backup:
+    dd 0
+esp_backup2:
+    dd 0
+eax_backup:
+    dd 0
 extern handleInterrupt
-global .interrupts.intHandler
-.interrupts.intHandler:
-    jmp $
-    push dword [.interruptNumber]
-    call handleInterrupt
+global interrupts.intHandler
+interrupts.intHandler:
+    ;mov byte [0xb8000], 'A'
+    ;mov byte [0xb8001], 11110000b
+    ;jmp $
+    cmp dword [interruptNumber], 8
+    je continue
+    cmp dword [interruptNumber], 10
+    je continue
+    cmp dword [interruptNumber], 11
+    je continue
+    cmp dword [interruptNumber], 12
+    je continue
+    cmp dword [interruptNumber], 13
+    je continue
+    cmp dword [interruptNumber], 14
+    je continue
+    cmp dword [interruptNumber], 17
+    je continue
+    cmp dword [interruptNumber], 30
+    je continue
 
+    push dword 0
+    continue:
+
+    mov [esp_backup2], esp
+
+    push esp
+    push ebp
+    push edi
+    push esi
+    push edx
+    push ecx
+    push ebx
+    push eax
+
+    push dword [interruptNumber]
+    call handleInterrupt
+    add esp, 4
+    pop eax
+    pop ebx
+    pop ecx
+    pop edx
+    pop esi
+    pop edi
+    pop ebp
+    pop dword [esp_backup]
+    add esp, 4
+    push eax
+    mov eax, [esp_backup]
+    cmp eax, [esp_backup2]
+    pop eax
     
+    je return
+    mov [eax_backup],eax
+    sub dword [esp_backup],12
+    mov eax, [esp_backup]
+    pop dword [eax]
+    add dword [esp_backup],4
+    mov eax, [esp_backup]
+    pop dword [eax]
+    add dword [esp_backup],4
+    mov eax, [esp_backup]
+    pop dword [eax]
+    sub dword [esp_backup], 8
+
+    mov eax, [eax_backup]
+    mov esp, [esp_backup]
+return:
+    ;mov eax, [esp_backup]
+    ;jmp $
+    iret
